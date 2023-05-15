@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>SiDoo</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">SiDoo</span>
+		</a>
+			<div class="profile-tab-nav border-right">
+				<ul class="side-menu top">
+			<div class="p-4">
+				<div class="img-circle text-center mb-11">
+					<img src="img/user2.jpg" alt="Image" class="shadow" style="margin-left : 100px;">
+				</div>
+				<h7 class="text-center" style="margin-left : 70px;">Kiran Acharya</h7>
+			</div>
+				</ul>
+		<ul class="side-menu top">
+			<li class="active">
+				<a class="nav-link" id="dashboard-tab" data-toggle="pill" href="index.html" role="tab" aria-controls="dashboard" aria-selected="false">
+					<i class='bx bxs-home' ></i>
+					<span class="text">Home</span>
+				</a>
+			</li>
+
+			<li>
+				<a class="nav-link" id="profile-tab" data-toggle="pill" href="profile.html" role="tab" aria-controls="profile" aria-selected="false">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Profile</span>
+				</a>
+			</li>
+			<li>
+				<a class="nav-link" id="document-tab" data-toggle="pill" href="document.html" role="tab" aria-controls="documents" aria-selected="false">
+					<i class='bx bxs-file' ></i>
+					<span class="text">Document</span>
+				</a>
+			</li>
+			
+		</ul>
+		<ul class="side-menu">
+			
+			<li>
+				<a class="nav-link" id="logout-tab" data-toggle="pill" href="login/index.html" role="tab" aria-controls="logout" aria-selected="false">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+		
+		</nav>
+		<!-- NAVBAR -->
+
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<!-- <button class="btn transparent" id="sign-up-btn">
+					Sign Document
+				  </button> -->
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="document.html" class="btn-sign">
+					<i class='bx bxs-cloud-sign' ></i>
+					<span class="text">Sign Document</span>
+				</a>
+				<!-- <a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>  -->
+			</div>
+
+<!-- Button trigger modal -->
+
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-file' ></i>
+					<span class="text">
+						<h3>0</h3>
+						<p>Draft</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-pencil' ></i>
+					<span class="text">
+						<h3>0</h3>
+						<p>Signed</p>
+					</span>
+				</li>
+			</ul>
+
+			<!--<a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>-->
+	<form>
+	<div>
+		<div class="col-md-3">
+			<span class="float-sm-right text-nowrap">
+			</span>
+	
+		</div>
+		
+		<ul class="box-info">
+
+			<li>
+				<div class="col-md-9 form-inline felement" data-fieldtype="filemanager" id="yui_3_17_2_1_1683986738025_314">
+				
+					
+		
+					<h3 style="margin-left: 10px;" class="sr-only">Send for signature</h3>
+							
+					
+
+					<h4 style="margin-top: 10px; margin-left: 10px;" >Title of documents</h4>
+					<label for="name" style="margin-top:5px; margin-left: -50px;">
+						<input type="text" style="margin-left: 60px;"><br>
+						</label>
+					<h4 style="margin-top: -10px; margin-left: 10px;" >Upload File PDF</h4>
+					
+						<div style="margin-top: 5px; margin-left: 10px;"class="upload-wrapper">
+							<label for="pdf-file" class="upload-label"></label>
+							<input type="file" id="pdf-file" class="upload-input">
+							<div class="upload-filename"></div>
+						</div>
+		
+					<div>
+						<a href="pdf.html" class="btn-signn" style="margin-bottom: 15px; margin-left: 0px;">
+								<span class="text">Upload</span>
+						</a>	
+					</div>
+					
+		
+							<script>
+							  const fileInput = document.getElementById('pdf-file');
+							  const fileName = document.querySelector('.upload-filename');
+						
+							  fileInput.addEventListener('change', function() {
+								fileName.textContent = this.files[0].name;
+							  });
+							</script>
+						
+		
+					
+		
+		
+					
+						
+		
+							
+		
+					
+					
+				</div>
+
+
+			</li>
+
+
+
+		</ul>
+		
+	</div>
+
+	</form>
+</div>
+
+				
+			
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="script.js">
+	</script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>SiDoo</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">SiDoo</span>
+		</a>
+			<div class="profile-tab-nav border-right">
+				<ul class="side-menu top">
+			<div class="p-4">
+				<div class="img-circle text-center mb-11">
+					<img src="img/user2.jpg" alt="Image" class="shadow" style="margin-left : 100px;">
+				</div>
+				<h7 class="text-center" style="margin-left : 70px;">Kiran Acharya</h7>
+			</div>
+				</ul>
+		<ul class="side-menu top">
+			<li>
+				<a href="index.html">
+					<i class='bx bxs-home' ></i>
+					<span class="text">Home</span>
+				</a>
+			</li>
+
+			<li  class="active">
+				<a href="profile.html" >
+					<i class='bx bxs-group' ></i>
+					<span class="text">Profile</span>
+				</a>
+			</li>
+			<li>
+				<a href="document.html" >
+					<i class='bx bxs-file' ></i>
+					<span class="text">Document</span>
+				</a>
+			</li>
+			
+		</ul>
+		<ul class="side-menu">
+			
+			<li>
+				<a class="nav-link" id="logout-tab" data-toggle="pill" href="login/index.html" role="tab" aria-controls="logout" aria-selected="false">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+		
+		</nav>
+		<!-- NAVBAR -->
+        <main>
+			<h3 class="mb-4">Account Settings</h3>
+
+			<div class="table-data">
+		
+				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+				
+					<div class="row">
+						<div class="col-md-6">
+							<form>
+
+								<label for="name" >Full Name</label>
+								<input type="name" id="email" name="name"  required><br>
+
+								<label for="email" >Email </label>
+								<input type="email" id="email" name="email"  required><br>
+							
+								<label for="username" >Username </label>
+								<input type="text" id="username" name="username" required ><br>
+							
+								<label for="new-password">New Password </label>
+								<input type="password" id="new-password" name="new-password" required><br>
+							
+								<label for="confirm-password">Confirm Password </label>
+								<input type="password" id="confirm-password" name="confirm-password" required><br>
+								
+								<div>
+									<button type="submit-up">Update</button>
+									<button type="button-can">Cancel</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				
+			</div>
+
+			<div class="mb-3">
+
+				<label for="sign" >Signature</label>
+
+					<fieldset class="w-50 m-0 p-0 border-0" id="id_files_filemanager_fieldset">
+					
+					<canvas id="signatureCanvas" width="400" height="200"></canvas>
+
+					<script>
+					var canvas = document.getElementById("signatureCanvas");
+					var context = canvas.getContext("2d");
+
+					canvas.addEventListener("mousedown", function(event) {
+						context.beginPath();
+						context.moveTo(event.offsetX, event.offsetY);
+						canvas.addEventListener("mousemove", drawSignature);
+					});
+
+					canvas.addEventListener("mouseup", function() {
+						canvas.removeEventListener("mousemove", drawSignature);
+					});
+
+					function drawSignature(event) {
+						context.lineTo(event.offsetX, event.offsetY);
+						context.stroke();
+					}
+
+					var saveButton = document.getElementById("saveButton");
+					saveButton.addEventListener("click", function() {
+						var dataURL = canvas.toDataURL("image/png");
+						var link = document.createElement("a");
+						link.download = "signature.png";
+						link.href = dataURL;
+						link.click();
+					});
+					</script>
+
+					</fieldset>
+
+					<button id="saveButton">Save</button>
+
+
+			</div>
+			
+
+
+
+		</main>
+	<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+
+	<script src="script.js"></script>
+</body>
+</html>
