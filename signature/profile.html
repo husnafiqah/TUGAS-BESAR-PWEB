@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.3/jspdf.min.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+	<script src="https://unpkg.com/downloadjs@1.4.7"></script>
+	<script src="./js/jquerynew.js"></script>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<title>SiDoo</title>
+</head>
+
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">SiDoo</span>
+		</a>
+		<div class="profile-tab-nav border-right">
+			<ul class="side-menu top">
+				<div class="p-4">
+					<h3 class="text-center" style="margin-left : 70px;" id="username"></h3>
+				</div>
+			</ul>
+			<ul class="side-menu top">
+				<li>
+					<a href="index.html">
+						<i class='bx bxs-home'></i>
+						<span class="text">Home</span>
+					</a>
+				</li>
+
+				<li class="active">
+					<a href="profile.html">
+						<i class='bx bxs-group'></i>
+						<span class="text">Profile</span>
+					</a>
+				</li>
+				<li>
+					<a href="document.html">
+						<i class='bx bxs-file'></i>
+						<span class="text">Document</span>
+					</a>
+				</li>
+
+			</ul>
+			<ul class="side-menu">
+
+				<li>
+					<a class="nav-link" id="logout-tab" data-toggle="pill" href="javascript:void(0)" role="tab"
+						aria-controls="logout" aria-selected="false" onclick="logout()">
+						<i class='bx bxs-log-out-circle'></i>
+						<span class="text">Logout</span>
+					</a>
+				</li>
+			</ul>
+
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu'></i>
+
+		</nav>
+		<!-- NAVBAR -->
+		<main>
+			<h3 class="mb-4">Account Settings</h3>
+			<h1 class="mb-4" id="load1"></h1>
+			<div class="table-data">
+
+				<div class="tab-content p-4 p-md-5" id="v-pills-tabContent">
+					<div class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+
+						<div class="row">
+							<div class="col-md-6">
+
+								<!--<label for="name" >Full Name</label>
+								<input type="name" id="email" name="name"  required><br>-->
+
+								<label for="email">Email </label>
+								<input type="email" id="email" name="email" readonly><br>
+
+								<label for="username">Username </label>
+								<input type="text" id="usernameup" name="usernameup" required><br>
+
+								<label for="new-password">New Password </label>
+								<input type="password" id="new-password" name="new-password" required><br>
+
+								<label for="confirm-password">Confirm Password </label>
+								<input type="password" id="confirm-password" name="confirm-password" required><br>
+
+								<script>
+									function clearInputs() {
+									  document.getElementById('usernameup').value = ''; // Mengatur nilai kolom kedua menjadi string kosong
+									  document.getElementById('new-password').value = ''; // Mengatur nilai kolom ketiga menjadi string kosong
+									  document.getElementById('confirm-password').value = ''; // Mengatur nilai kolom ketiga menjadi string kosong
+									  // Tambahkan baris kode di atas untuk setiap kolom yang ingin dihapus isinya
+									}
+								</script>
+
+								<div>
+									<button type="submit-up" onclick="update()">Update</button>
+									<button onclick="clearInputs()" type="button-can">Cancel</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+
+				<div class="mb-3">
+
+					<label for="sign">Signature</label>
+
+					<fieldset class="w-50 m-0 p-0 border-0" id="id_files_filemanager_fieldset">
+
+						<canvas id="signatureCanvas" width="400" height="200"></canvas>
+
+					</fieldset>
+
+					<!-- <input type="file" name="pdffile" id="pdffile" accept="application/pdf"
+						onchange="pdfconvertToBase64()" /> -->
+					<!-- <input type="hidden" id="pdftext" name="pdftext" /> -->
+					<input type="hidden" id="signtext" name="signtext" />
+					<img id="imgsign"/>
+
+					<div>
+						<button type="savee" id="saveButton">Save</button>
+						<button type="button-can" id="clearButton">Hapus</button>
+						
+					</div>
+					
+					<!-- <button id="tesDownload" onclick="modifyPdf()">Test Download</button> -->
+
+
+				</div>
+
+				
+
+
+				<script>
+					var canvas = document.getElementById("signatureCanvas");
+					var context = canvas.getContext("2d");
+					context.fillStyle = 'white';
+					context.fillRect(0, 0, canvas.width, canvas.height);
+
+					canvas.addEventListener("mousedown", function (event) {
+						context.beginPath();
+						context.moveTo(event.offsetX, event.offsetY);
+						canvas.addEventListener("mousemove", drawSignature);
+					});
+
+					canvas.addEventListener("mouseup", function () {
+						canvas.removeEventListener("mousemove", drawSignature);
+					});
+
+					function drawSignature(event) {
+						context.lineTo(event.offsetX, event.offsetY);
+						context.stroke();
+					}
+
+					var saveButton = document.getElementById("saveButton");
+					saveButton.addEventListener("click", function () {
+						imgconverttobase64();
+						updatesign();
+						// pdfconvertToBase64();
+						// savedocumenttoapi();
+					});
+
+					var clearButton = document.getElementById("clearButton");
+  					clearButton.addEventListener("click", function() {
+    					clearSignature();
+  					});
+
+  					function clearSignature() {
+    				context.clearRect(0, 0, canvas.width, canvas.height);
+  					}
+
+					
+
+					function imgconverttobase64() {
+						var imgData = canvas.toDataURL("image/jpeg", 1.0);
+						console.log(imgData);
+						$("#signtext").val(imgData);
+						// var pdf = new jsPDF();	
+						// pdf.addImage(imgData, 'JPEG', 0, 0);
+						// var reader = new FileReader();
+						// reader.readAsDataURL(pdf.output('blob'));
+						// reader.onloadend = function () {
+						// 	var base64data = reader.result;
+						// 	console.log(base64data);
+						// 	$("#signtext").val(imgData);
+						// }
+					}
+
+					function pdfconvertToBase64() {
+						//Read File
+						var selectedFile = document.getElementById("pdffile").files;
+						//Check File is not Empty
+						if (selectedFile.length > 0) {
+							// Select the very first file from list
+							var fileToLoad = selectedFile[0];
+							// FileReader function for read the file.
+							var fileReader = new FileReader();
+							var base64;
+							// Onload of file read the file content
+							fileReader.onload = function (fileLoadedEvent) {
+								base64 = fileLoadedEvent.target.result;
+								// Print data in console
+								console.log(base64);
+								$("#pdftext").val(base64);
+							};
+							// Convert data to base64
+							fileReader.readAsDataURL(fileToLoad);
+						}
+					}
+
+				</script>
+
+
+
+
+
+
+
+
+
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+
+	<script src="script.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			try {
+				var data = sessionStorage.getItem("data") !== undefined ? JSON.parse(sessionStorage.getItem("data")) : "";
+				console.log(data);
+				if (data === "") {
+					window.location = "./login/index.html";
+				} else if (data.rc === "00") {
+					$("#username").text(data.user[0].username);
+					$("#usernameup").val(data.user[0].username);
+					$("#email").val(data.user[0].email);
+					$("#imgsign").attr("src", data.user[0].sign_img);
+					$("#sidebar").css("display", "block");
+				}
+			} catch (err) {
+				window.location = "./login/index.html";
+			}
+
+		});
+
+		async function modifyPdf() {
+			// Fetch an existing PDF document
+			const url = 'http://127.0.0.1:5500/signature/docum.pdf'
+			const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
+
+			// Load a PDFDocument from the existing PDF bytes
+			const pdfDoc = await PDFLib.PDFDocument.load(existingPdfBytes);
+
+			// Get the first page of the document
+			const pages = pdfDoc.getPages();
+			const firstPage = pages[0];
+			const endPage = pages[pages.length - 1];
+
+			// Fetch JPEG image
+			const jpgUrl = 'http://127.0.0.1:5500/signature/ttd.jpg';
+			const jpgImageBytes = await fetch(jpgUrl).then((res) => res.arrayBuffer());
+
+			const jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
+			const jpgDims = jpgImage.scale(0.25);
+
+
+			// Get the width and height of the first page
+			const { width, height } = firstPage.getSize();
+			// firstPage.drawText('This text was added with JavaScript!', {
+			// 	x: 5,
+			// 	y: height / 2 + 300,
+			// 	size: 50
+			// });
+
+
+			// Add a blank page to the document
+
+			endPage.drawImage(jpgImage, {
+				x: firstPage.getWidth() / 2 - jpgDims.width / 2,
+				y: firstPage.getHeight() / 2 - jpgDims.height / 2,
+				width: jpgDims.width,
+				height: jpgDims.height,
+			});
+
+
+			// Serialize the PDFDocument to bytes (a Uint8Array)
+			const pdfBytes = await pdfDoc.save();
+
+			// Trigger the browser to download the PDF document
+			download(pdfBytes, "testanak.pdf", "application/pdf");
+		}
+
+		async function copyPages() {
+			//$("#load1").text("MOHONT TUNGGU SEBENTAR...!!!!");
+			const url1 = 'http://127.0.0.1:5500/signature/ttd.pdf'
+			const url2 = 'http://127.0.0.1:5500/signature/docum.pdf'
+
+			const firstDonorPdfBytes = await fetch(url1).then(res => res.arrayBuffer())
+			const secondDonorPdfBytes = await fetch(url2).then(res => res.arrayBuffer())
+
+			const firstDonorPdfDoc = await PDFLib.PDFDocument.load(firstDonorPdfBytes)
+			const secondDonorPdfDoc = await PDFLib.PDFDocument.load(secondDonorPdfBytes)
+
+			const pdfDoc = await PDFLib.PDFDocument.create();
+
+			const [firstDonorPage] = await pdfDoc.copyPages(firstDonorPdfDoc, [0])
+			const [secondDonorPage] = await pdfDoc.copyPages(secondDonorPdfDoc, [5])
+
+			pdfDoc.addPage(firstDonorPage)
+			pdfDoc.insertPage(0, secondDonorPage)
+
+			const pdfBytes = await pdfDoc.save()
+			download(pdfBytes, "anaksekolah.pdf", "application/pdf");
+			//$("#load1").text("");
+		}
+
+		function update() {
+			var data = JSON.parse(sessionStorage.getItem("data"));
+			var idaja = data.user[0].id;
+			var username = $("#usernameup").val();
+			var email = $("#email").val();
+			var password = $("#new-password").val();
+			var passwordconf = $("#confirm-password").val();
+			alert(password.length);
+			if (username.length !== 0 && idaja.length !== 0 && username.length !== 0 && email.length !== 0 && password.length !== 0 || passwordconf.length !== 0) {
+				if (password !== passwordconf) {
+					alert("new password not same with confirm password!");
+				} else {
+					var settings = {
+						"url": "http://localhost:8000/users/" + idaja,
+						"method": "POST",
+						"timeout": 0,
+						"headers": {
+							"Content-Type": "application/json",
+							"Cookie": "Cookie_1=value; Cookie_2=value"
+						},
+						"data": JSON.stringify({ "username": username, "email": email, "password": password }),
+					};
+
+					$.ajax(settings).done(function (response) {
+						// console.log(response);
+						if (response.rc === "00") {
+							logout();
+						} else {
+							alert(response.msg);
+						}
+					});
+				}
+			}else{
+				alert("Cek Kembali Data Anda");
+			}
+		}
+
+		function updatesign() {
+			var data = JSON.parse(sessionStorage.getItem("data"));
+			var idaja = data.user[0].id;
+			var settings = {
+				"url": "http://localhost:8000/userssign/" + idaja,
+				"method": "POST",
+				"timeout": 0,
+				"headers": {
+					"Content-Type": "application/json",
+					"Cookie": "Cookie_1=value; Cookie_2=value"
+				},
+				"data": JSON.stringify({ "signfile": $("#signtext").val(), "username": $("#username").text() }),
+			};
+			$.ajax(settings).done(function (response) {
+				// console.log(response);
+				if (response.rc === "00") {
+					alert(response.msg);
+					$("#imgsign").attr("src", "http://127.0.0.1:5500/signature/file/"+$("#username").text()+".jpg");
+					location.reload();
+				} else {
+					alert(response.msg);
+				}
+			});
+		}
+
+
+		function logout() {
+			sessionStorage.removeItem("data");
+			window.location = "./login/index.html";
+		}
+
+		function savedocumenttoapi() {
+			var username = $("#username").text();
+
+			var settings = {
+				"url": "http://localhost:8000/documentfile",
+				"method": "POST",
+				"timeout": 0,
+				"headers": {
+					"Content-Type": "application/json",
+					"Cookie": "Cookie_1=value; Cookie_2=value"
+				},
+				"data": JSON.stringify({ "username": username, "pdffile": $("#pdftext").val(), "signfile": $("#signtext").val() }),
+			};
+
+			$.ajax(settings).done(function (response) {
+				if (response.rc === "00") {
+					alert(response.msg);
+					location.reload();
+				} else {
+					alert("Gagal Update");
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>

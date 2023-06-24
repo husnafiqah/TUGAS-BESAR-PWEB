@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<!-- My CSS -->
+	<link rel="stylesheet" href="style.css">
+
+	<script src="./js/jquerynew.js"></script>
+	<title>SiDoo</title>
+</head>
+
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<i class='bx bxs-smile'></i>
+			<span class="text">SiDoo</span>
+		</a>
+		<div class="profile-tab-nav border-right">
+			<ul class="side-menu top">
+				<div class="p-4">
+					<h3 class="text-center" style="margin-left : 70px;" id="username"></h3>
+				</div>
+			</ul>
+			<ul class="side-menu top">
+				<li class="active">
+					<a class="nav-link" id="dashboard-tab" data-toggle="pill" href="index.html" role="tab"
+						aria-controls="dashboard" aria-selected="false">
+						<i class='bx bxs-home'></i>
+						<span class="text">Home</span>
+					</a>
+				</li>
+
+				<li>
+					<a class="nav-link" id="profile-tab" data-toggle="pill" href="profile.html" role="tab"
+						aria-controls="profile" aria-selected="false">
+						<i class='bx bxs-group'></i>
+						<span class="text">Profile</span>
+					</a>
+				</li>
+				<li>
+					<a class="nav-link" id="document-tab" data-toggle="pill" href="document.html" role="tab"
+						aria-controls="documents" aria-selected="false">
+						<i class='bx bxs-file'></i>
+						<span class="text">Document</span>
+					</a>
+				</li>
+
+			</ul>
+			<ul class="side-menu">
+
+				<li>
+					<a class="nav-link" id="logout-tab" data-toggle="pill" href="javascript:void(0)" role="tab"
+						aria-controls="logout" aria-selected="false" onclick="logout()">
+						<i class='bx bxs-log-out-circle'></i>
+						<span class="text">Logout</span>
+					</a>
+				</li>
+			</ul>
+
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu'></i>
+
+		</nav>
+		<!-- NAVBAR -->
+
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<!-- <button class="btn transparent" id="sign-up-btn">
+					Sign Document
+				  </button> -->
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right'></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="document.html" class="btn-sign">
+					<i class='bx bxs-cloud-sign'></i>
+					<span class="text">Sign Document</span>
+				</a>
+				<!-- <a href="#" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Download PDF</span>
+				</a>  -->
+			</div>
+
+			<!-- Button trigger modal -->
+
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-file'></i>
+					<span class="text">
+						<h3 id="document-count">0</h3>
+						<p>Draft</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-pencil'></i>
+					<span class="text">
+						<h3 id="document-count-status">0</h3>
+						<p>Signed</p>
+					</span>
+				</li>
+			</ul>
+
+				<div>
+					<div class="col-md-3">
+						<span class="float-sm-right text-nowrap">
+						</span>
+
+					</div>
+
+					<ul class="box-info">
+
+						<li>
+							<div class="col-md-9 form-inline felement" data-fieldtype="filemanager"
+								id="yui_3_17_2_1_1683986738025_314">
+
+								<h4 style="margin-top: -10px; margin-left: 10px;">Nama File</h4>
+								<input type="filenama" id="filenama" name="filenama" placeholder="Masukkan nama file" required><br>
+
+								<h4 style="margin-top: -10px; margin-left: 10px;">Upload File PDF</h4>
+								<input type="file" name="pdffile" id="pdffile" accept="application/pdf"
+									onchange="pdfconvertToBase64()" />
+									<h4 style="margin-top: -10px; margin-left: 10px; ">Username To</h4>
+									<div class="select">
+									<select id="username_to" name="username_to" class="form-control"  style="margin-bottom: 15px;"></select>
+									</div>
+								<input type="hidden" id="pdftext" name="pdftext" />
+								<button type="save" id="saveButton">Save</button>
+
+
+							</div>
+
+
+							<script>
+								function pdfconvertToBase64() {
+									//Read File
+									var selectedFile = document.getElementById("pdffile").files;
+									//Check File is not Empty
+									if (selectedFile.length > 0) {
+										// Select the very first file from list
+										var fileToLoad = selectedFile[0];
+										// FileReader function for read the file.
+										var fileReader = new FileReader();
+										var base64;
+										// Onload of file read the file content
+										fileReader.onload = function (fileLoadedEvent) {
+											base64 = fileLoadedEvent.target.result;
+											// Print data in console
+											console.log(base64);
+											$("#pdftext").val(base64);
+										};
+										// Convert data to base64
+										fileReader.readAsDataURL(fileToLoad);
+									}
+								}
+
+								var saveButton = document.getElementById("saveButton");
+								saveButton.addEventListener("click", function () {
+									pdfconvertToBase64();
+									savedocumenttoapi();
+								});
+
+								function savedocumenttoapi() {
+									var username = $("#username").text();
+
+									var settings = {
+										"url": "http://localhost:8000/documentfile",
+										"method": "POST",
+										"timeout": 0,
+										"headers": {
+											"Content-Type": "application/json",
+											"Cookie": "Cookie_1=value; Cookie_2=value"
+										},
+										"data": JSON.stringify({"filenama": $("#filenama").val(), "username": username, "pdffile": $("#pdftext").val(), "username_to": $("#username_to").val() }),
+									};
+
+									$.ajax(settings).done(function (response) {
+										if (response.rc === "00") {
+											alert(response.msg);
+											window.location.reload();
+										} else {
+											alert("Gagal Update");
+										}
+									});
+								}
+							</script>
+
+				</div>
+
+
+				</li>
+
+
+
+				</ul>
+
+				</div>
+
+			
+			</div>
+
+
+
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+
+	<script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+	<script src="script.js">
+	</script>
+	<script type="text/javascript">
+		CKEDITOR.replace('isidata',
+			{
+
+
+				toolbar:
+					[
+						{ name: 'document', items: ['Preview'] },
+						{ name: 'clipboard', items: ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo'] },
+						{ name: 'editing', items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt'] },
+						{ name: 'insert', items: ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'] },
+						'/',
+						{ name: 'styles', items: ['Styles', 'Format'] },
+						{ name: 'basicstyles', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] },
+						{ name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
+						{ name: 'links', items: ['Link', 'Unlink', 'Anchor'] },
+						{ name: 'tools', items: ['Maximize', '-', 'About'] }
+
+					],
+				width: "100%",
+				height: "500px"
+
+			});
+		$(document).ready(function () {
+			try {
+				getalluser();
+				var data = sessionStorage.getItem("data") !== undefined ? JSON.parse(sessionStorage.getItem("data")) : "";
+				console.log(data);
+				if (data === "") {
+					window.location = "./login/index.html";
+				} else if (data.rc === "00") {
+					$("#username").text(data.user[0].username);
+					$("#usernameup").val(data.user[0].username);
+					$("#email").val(data.user[0].email);
+					$("#sidebar").css("display", "block");
+				}
+			} catch (err) {
+				window.location = "./login/index.html";
+			}
+		});
+
+		function getalluser() {
+			var settings = {
+				"url": "http://localhost:8000/allusers",
+				"method": "GET",
+				"timeout": 0,
+				"headers": {
+					"Content-Type": "application/json",
+					"Cookie": "Cookie_1=value; Cookie_2=value"
+				},
+			};
+
+			$.ajax(settings).done(function (response) {
+				console.log(response);
+				var html = '';
+
+				for(var i=0;i<response.length;i++){
+					var jsdata = response[i];
+					html += `<option value="`+jsdata.username+`">`+jsdata.username+`</option>`;
+				}
+				$("#username_to").empty().append(html);
+			});
+		}
+
+		function simpandata() {
+			var isidata = CKEDITOR.instances['isidata'].getData();
+			var judul = $("#judul").val();
+			alert(isidata);
+
+		}
+
+		function logout() {
+			sessionStorage.removeItem("data");
+			window.location = "./login/index.html";
+		}
+	</script>
+
+<script>
+const backendUrl = 'http://localhost:8000';
+
+$(document).ready(function () {
+	try {
+		var data = sessionStorage.getItem("data") !== undefined ? JSON.parse(sessionStorage.getItem("data")) : "";
+		console.log(data);
+		if (data === "") {
+			window.location = "./login/index.html";
+		} else if (data.rc === "00") {
+			$("#username").text(data.user[0].username);
+			$("#username_to").val(data.user[0].username);
+			$("#email").val(data.user[0].email);
+			$("#sidebar").css("display", "block");
+			
+			fetch(`${backendUrl}/doc/${data.user[0].username}`)
+			.then(response => response.json())
+			.then(data => {
+				 const documentCount = data.count;
+				 const documentCountElement = document.getElementById('document-count'); 
+				 if (documentCountElement) {
+					documentCountElement.textContent = documentCount.toString();
+				 }
+				})
+				.catch(error => {
+  					console.log(error);
+				});
+				fetch(`${backendUrl}/doc/status/${data.user[0].username}`)
+				.then(response => response.json())
+				.then(data => { 
+					const documentStatusCount = data.count;
+					const documentStatusCountElement = document.getElementById('document-count-status'); 
+					if (documentStatusCountElement) {	
+						documentStatusCountElement.textContent = documentStatusCount.toString();
+					}
+				})
+				.catch(error => {
+					console.log(error);
+				});
+			}
+		} catch (err) {
+	window.location = "./login/index.html";
+
+}
+});
+	</script>
+</body>
+
+</html>

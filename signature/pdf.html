@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+        <!-- Boxicons -->
+        <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+        <!-- My CSS -->
+        <link rel="stylesheet" href="style.css">
+    
+        <title>SiDoo</title>
+    </head>
+
+    <section id="contentt">
+		<!-- NAVBAR -->
+		<nav>
+            <li>
+                <a class="nav-link" id="logout-tab" data-toggle="pill" href="index.html" role="tab" aria-controls="logout" aria-selected="false" >
+                    <i class='bx bxs-log-out-circle'style="margin-top: 20px; margin-left: 10px;"></i>
+                    <button class="text"  >Back</button>
+                </a>
+            </li>
+		
+		</nav>
+    </section>
+
+    <!-- main -->
+    <section id="ini">
+    <main>
+        
+        <div class="frame">
+            <div class="frame-header" >
+                 <h2 class="text"> For Signature</h2>
+                <div>
+                    <button id="tombol" href="#" onclick="Swal('Test', 'test', 'success')"  type="btn-sign" >
+                        <i class='bx bxs-cloud-sign' ></i>
+                    <span  class="text">Sign Doc</span>
+                    </button>
+                  </div>
+            </div>
+            <div class="frame-body">
+                
+                <embed src="img/density.pdf" type="application/pdf" width="100%" height="600px" />
+                
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-end" >
+                    <a  href="index.html">
+                    <button  type="button">Cancel</button>
+                </a>
+                <a  href="send.html">
+                    <button type="submit" href="send.html">
+                        <i class='bx bxs-cloud-sign' ></i>
+                        <span class="text">Next</span>
+                    </button>
+                </a>
+                    
+        
+                </div>
+            </div>
+        </div>
+        
+        <script src="script.js"></script>
+        <script src="sweetalert2.all.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                var data = JSON.parse(sessionStorage.getItem("data"));
+                console.log(data.user[0]);
+                $("#username").text(data.user[0].username);
+            });
+        </script>
+</main>
+    </section>
+</html>

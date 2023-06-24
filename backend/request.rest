@@ -1,0 +1,58 @@
+GET http://localhost:8000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE1LCJ1c2VybmFtZSI6ImhhbG8iLCJlbWFpbCI6ImhhbG8xMUBnbWFpbC5jb20iLCJpYXQiOjE2ODUwNzkxNDgsImV4cCI6MTY4NTA3OTE2M30.e6mjCCU7J19tpuIigGW8rs3davJ3XhD4PRPQPKluJsY
+###
+POST http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "username" : "halox",
+    "email"     : "halo11x@gmail.com",
+    "password" : "123456",
+    "confPassword" : "123456",
+    "active" : 1,
+    "sign_img" : "xixix"
+}
+###
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{       
+    "email"     : "halo11x@gmail.com",
+    "password" : "123456"
+}
+
+###
+GET http://localhost:8000/doc/aca
+
+###
+POST http://localhost:8000/reset-password
+Content-Type: application/json
+
+{
+  "email": "khairinnisa2310@gmail.com"
+}
+
+
+###
+GET http://localhost:8000/doc/status/aca
+
+###
+DELETE http://localhost:8000/logout
+
+###
+PATCH  http://localhost:8000/users/1
+Content-Type: application/json
+
+{
+    "username" : "acaaja",
+    "email"     : "acaaa@gmail.com",
+    "sign_img" : "aaaa"
+}
+
+###
+DELETE http://localhost:8000/users/2
+
+###
+POST http://localhost:8000/document
+Content-Type: application/json
+###
