@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 20, 2023 at 12:22 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 7.4.27
+-- Host: localhost:3306
+-- Generation Time: Jun 25, 2023 at 06:47 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,7 +36,7 @@ CREATE TABLE `document` (
   `status` int(11) DEFAULT 1,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `document`
@@ -55,7 +55,11 @@ INSERT INTO `document` (`document_id`, `username`, `filenama`, `urlpdf`, `userna
 (57, 'api', 'filekuliah', 'http://127.0.0.1:5500/signature/file/api_1686490125601.pdf', 'aca', 2, '2023-06-11 13:28:45', '2023-06-19 16:03:43'),
 (61, 'api', 'pweb', 'http://127.0.0.1:5500/signature/file/api_1687190084027.pdf', 'api', 2, '2023-06-19 15:54:44', '2023-06-19 15:54:48'),
 (62, 'aca', 'dokumen baru', 'http://127.0.0.1:5500/signature/file/aca_1687190615597.pdf', 'halo_', 1, '2023-06-19 16:03:35', '2023-06-19 16:03:35'),
-(63, 'aca', 'tugas pweb', 'http://127.0.0.1:5500/signature/file/tugas pweb-aca_1687192376701.pdf', 'aca', 1, '2023-06-19 16:32:56', '2023-06-19 16:32:56');
+(63, 'aca', 'tugas pweb', 'http://127.0.0.1:5500/signature/file/tugas pweb-aca_1687192376701.pdf', 'aca', 1, '2023-06-19 16:32:56', '2023-06-19 16:32:56'),
+(66, 'husnafi', 'damin', 'http://127.0.0.1:5500/signature/file/damin-husnafi_1687707480660.pdf', 'husnafi', 2, '2023-06-25 15:38:00', '2023-06-25 16:12:11'),
+(67, 'husnafi', 'pweb', 'http://127.0.0.1:5500/signature/file/pweb-husnafi_1687709480353.pdf', 'aca', 1, '2023-06-25 16:11:20', '2023-06-25 16:11:20'),
+(68, 'afiqah', 'pweb', 'http://127.0.0.1:5500/signature/file/pweb-afiqah_1687711145902.pdf', 'aca', 2, '2023-06-25 16:39:05', '2023-06-25 16:42:38'),
+(69, 'afiqah', 'terserah', 'http://127.0.0.1:5500/signature/file/terserah-afiqah_1687711227677.pdf', 'afiqah', 2, '2023-06-25 16:40:27', '2023-06-25 16:40:56');
 
 -- --------------------------------------------------------
 
@@ -70,7 +74,7 @@ CREATE TABLE `signature` (
   `sign_at` datetime DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -88,17 +92,19 @@ CREATE TABLE `users` (
   `sign_img` varchar(255) NOT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `refresh_token`, `active`, `sign_img`, `createdAt`, `updatedAt`) VALUES
-(18, 'aca', 'aca@gmail.com', '$2b$10$scYrUl./TCWJxlTMQSXxl.eE5sguZP55rWydyhxf6lI2aAQfYkZwS', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJ1c2VybmFtZSI6ImFjYSIsImVtYWlsIjoiYWNhQGdtYWlsLmNvbSIsImlhdCI6MTY4NzI1NDMzNSwiZXhwIjoxNjg3MzQwNzM1fQ.PBXcumBmD6fshsEmW25cpIVrOnQ2GPhiX9_LvVD0oCo', 1, 'http://127.0.0.1:5500/signature/file/aca.jpg', '2023-06-10 10:21:50', '2023-06-20 09:45:35'),
+(18, 'aca', 'aca@gmail.com', '$2b$10$scYrUl./TCWJxlTMQSXxl.eE5sguZP55rWydyhxf6lI2aAQfYkZwS', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJ1c2VybmFtZSI6ImFjYSIsImVtYWlsIjoiYWNhQGdtYWlsLmNvbSIsImlhdCI6MTY4NzcxMTMzNywiZXhwIjoxNjg3Nzk3NzM3fQ.kb4HQtJbciQj8hhgBPPVdxMrLQbb2Jzkdeh2Ex3pfzQ', 1, 'http://127.0.0.1:5500/signature/file/aca.jpg', '2023-06-10 10:21:50', '2023-06-25 16:42:17'),
 (19, 'halo_', 'halo@gmail.com', '$2b$10$TAMYDwFczgaSnzBlgObPPe2XyExPw.McMm2cWqTN09KFYxDbpGDkq', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE5LCJ1c2VybmFtZSI6ImhhbG9fIiwiZW1haWwiOiJoYWxvQGdtYWlsLmNvbSIsImlhdCI6MTY4NjQ4ODk1MiwiZXhwIjoxNjg2NTc1MzUyfQ.j_06riOEiWKMVN6THniqLM8bQyyqY-g6OjbWhxZrwdY', 1, 'http://127.0.0.1:5500/signature/file/halo_.jpg', '2023-06-10 10:30:17', '2023-06-11 13:09:12'),
 (20, 'khairin_', 'khairinnisa2310@gmail.com', '$2b$10$x618Bxq8OmGa1V5fb7VJA.fEgoion7mxtvMEUK03EhFIfV7UsA6sS', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIwLCJ1c2VybmFtZSI6ImtoYWlyaW5fIiwiZW1haWwiOiJraGFpcmlubmlzYTIzMTBAZ21haWwuY29tIiwiaWF0IjoxNjg2MzkzMTg0LCJleHAiOjE2ODY0Nzk1ODR9._Ti60sRipZi-SZVGzyi7lex0xIreb8JUVBG40ZE_9eo', 1, 'http://127.0.0.1:5500/signature/file/khairin_.jpg', '2023-06-10 10:32:59', '2023-06-10 10:33:30'),
-(25, 'api', 'api@gmail.com', '$2b$10$RMshEQtZ3du1G7stY3iG7.JOz.Hmc8hui9HgDNaATMx//H1DhyBv2', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1LCJ1c2VybmFtZSI6ImFwaSIsImVtYWlsIjoiYXBpQGdtYWlsLmNvbSIsImlhdCI6MTY4NzI1NDI5NCwiZXhwIjoxNjg3MzQwNjk0fQ.b8smeR4mapbheRnJVts4e7YfZ80ZMIM2hysVQn6q3GU', 1, 'http://127.0.0.1:5500/signature/file/api.jpg', '2023-06-11 13:27:58', '2023-06-20 09:44:54');
+(25, 'api', 'api@gmail.com', '$2b$10$RMshEQtZ3du1G7stY3iG7.JOz.Hmc8hui9HgDNaATMx//H1DhyBv2', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI1LCJ1c2VybmFtZSI6ImFwaSIsImVtYWlsIjoiYXBpQGdtYWlsLmNvbSIsImlhdCI6MTY4NzI1NDI5NCwiZXhwIjoxNjg3MzQwNjk0fQ.b8smeR4mapbheRnJVts4e7YfZ80ZMIM2hysVQn6q3GU', 1, 'http://127.0.0.1:5500/signature/file/api.jpg', '2023-06-11 13:27:58', '2023-06-20 09:44:54'),
+(26, 'husnafi', 'afi@gmail.com', '$2b$10$2XMPreGdItTl./.wzfPssuu42e0PIb3EDU8NUYUCLHq7M7GOvi3l2', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjI2LCJ1c2VybmFtZSI6Imh1c25hZmkiLCJlbWFpbCI6ImFmaUBnbWFpbC5jb20iLCJpYXQiOjE2ODc3MDk4MzAsImV4cCI6MTY4Nzc5NjIzMH0.D-TeBRUckcu7uc4PbyzBE0rLTVfb7gwQcGokpAuG1wM', 1, 'http://127.0.0.1:5500/signature/file/husnafi.jpg', '2023-06-25 15:23:08', '2023-06-25 16:17:10'),
+(32, 'afiqah', 'afiqah@gmail.com', '$2b$10$sVmdaBQtjfddUeoxigB3YeeIxD4Er0XZDClSSlveR/9DI.inTcMbG', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMyLCJ1c2VybmFtZSI6ImFmaXFhaCIsImVtYWlsIjoiYWZpcWFoQGdtYWlsLmNvbSIsImlhdCI6MTY4NzcxMTA0NCwiZXhwIjoxNjg3Nzk3NDQ0fQ.kSAiB69PGlUuDuKpmQleRvyhUvexxt_mojZ05m9xsx4', 1, 'http://127.0.0.1:5500/signature/file/afiqah.jpg', '2023-06-25 16:34:30', '2023-06-25 16:37:41');
 
 --
 -- Indexes for dumped tables
@@ -135,13 +141,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `document`
 --
 ALTER TABLE `document`
-  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `document_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
